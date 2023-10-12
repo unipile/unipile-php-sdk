@@ -1,0 +1,19 @@
+{
+    "name": "unipile/unipile-php",
+    "description": "Unipile PHP SDK",
+    "license": "MIT",
+    "authors" : [
+        {
+          "name": "Arnaud Hartmann",
+          "email": "arnaud@unipile.com"
+        }
+    ],
+    "require": {
+        "guzzlehttp/guzzle": "^7.0"
+    },
+    "autoload": {
+            "psr-4": {
+                "Unipile\\": "src/"
+            }
+        }    
+}
