@@ -153,16 +153,30 @@ class Account extends UnipileSDK
         }
     }
 
-    public function createHostedLink()
+
+    public function createHostedLink($expiresOn = 'PT1H', $name = '', $success_redirect_url = '', $fail_redirect_url = '', $notify_url = '', $reconnect_account = '', $providers = '*')
     {
         $timestamp = new \DateTime();
-        $timestamp->add(new \DateInterval('PT1H'));
+        $timestamp->add(new \DateInterval($expiresOn));
+
+        if(empty($reconnect_account)) {
+            $type = 'create';
+        }
+        else {
+            $type = 'reconnect';
+        }
 
         try {
-            $response = $this->httpClient->post("/api/v1/hosted/accounts/auth_link", [
+            $response = $this->httpClient->post('/api/v1/hosted/accounts/link', [
                 'json' => [
-                    'providers' => '*',
-                    'expiresOn' => $timestamp->format('Y-m-d\TH:i:s.000\Z')
+                    'type' => $type,
+                    'name' => $name,
+                    'providers' => $providers,
+                    'success_redirect_url' => $success_redirect_url,
+                    'fail_redirect_url' => $fail_redirect_url,
+                    'notify_url' => $notify_url,
+                    'expiresOn' => $timestamp->format('Y-m-d\TH:i:s.000\Z'),
+                    'reconnect_account' => $reconnect_account,
                 ],
                 'headers' => [
                     'X-API-KEY' => $this->token,
