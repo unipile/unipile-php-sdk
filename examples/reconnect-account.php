@@ -23,7 +23,7 @@ if (isset($_GET['type'])) {
 ?>
 
     <div class="container">
-        <h1 class="mt-5">Reconnect un compte IMAP</h1>
+        <h1 class="mt-5">Reconnect IMAP account</h1>
         <?php if ($reconnectAccountMessage !== null) : ?>
             <p><?php echo $reconnectAccountMessage; ?></p>
         <?php else : ?>
@@ -31,16 +31,16 @@ if (isset($_GET['type'])) {
                 <label for="email">Email:</label>
                 <input type="text" id="email" name="email" required><br>
                 
-                <label for="password">Mot de passe:</label>
+                <label for="password">Password</label>
                 <input type="password" id="password" name="password" required><br>
                 
-                <label for="imap_host">Hôte IMAP:</label>
+                <label for="imap_host">Server IMAP:</label>
                 <input type="text" id="imap_host" name="imap_host" required><br>
                 
                 <label for="imap_port">Port IMAP:</label>
                 <input type="number" id="imap_port" name="imap_port" value="993" required><br>
                 
-                <label for="smtp_host">Hôte SMTP:</label>
+                <label for="smtp_host">Server SMTP:</label>
                 <input type="text" id="smtp_host" name="smtp_host" required><br>
                 
                 <label for="smtp_port">Port SMTP:</label>
@@ -77,7 +77,7 @@ if (isset($_GET['type'])) {
 ?>
 
     <div class="container">
-        <h1 class="mt-5">Reconnecter un compte Linkedin</h1>
+        <h1 class="mt-5">Reconnect Linkedin account</h1>
         <?php if ($reconnectAccountMessage !== null) : ?>
             <p><?php echo $reconnectAccountMessage; ?></p>
         <?php else : ?>
@@ -85,13 +85,13 @@ if (isset($_GET['type'])) {
                 <label for="email">Username:</label>
                 <input type="text" id="username" name="username" required><br>
                 
-                <label for="password">Mot de passe:</label>
+                <label for="password">Password:</label>
                 <input type="password" id="password" name="password" required><br>
     
                 
                 <input type="submit" value="Reconnecter le compte">
             </form>
-            ou VIA COOKIE
+            or by COOKIE
             <form method="post">
                 <label for="access_token"> access_token (li_at):</label>
                 <input type="text" id="access_token" name="access_token" required><br>
@@ -100,7 +100,7 @@ if (isset($_GET['type'])) {
                 <input type="text" id="csrf_token" name="csrf_token" required><br>
     
                 
-                <input type="submit" value="Reconnecter le compte">
+                <input type="submit" value="Reconnect account">
             </form>
         <?php endif; ?>
     </div>

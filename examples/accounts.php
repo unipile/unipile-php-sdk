@@ -19,7 +19,15 @@ try {
 $actual_link = (empty($_SERVER['HTTPS']) ? 'http' : 'https') . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 $hostedLink =  "#";
 try {
-    $result =  $unipileSDK->Account->createHostedLink();
+    $result =  $unipileSDK->Account->createHostedLink(
+        'PT1H',
+        'My User ID',
+        $actual_link.'?status=success',
+        $actual_link.'?status=fail',
+        $actual_link.'/examples/callback.php',
+        '',
+        '*'
+    );
     $hostedLink = $result['url'];
 } catch (UnipileSDKException $e) {
     echo "Error: " . $e->getMessage();

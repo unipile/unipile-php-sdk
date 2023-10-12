@@ -23,7 +23,7 @@ if (isset($_GET['type'])) {
 ?>
 
     <div class="container">
-        <h1 class="mt-5">Ajouter un compte IMAP</h1>
+        <h1 class="mt-5">Add imap account</h1>
         <?php if ($addedAccountMessage !== null) : ?>
             <p><?php echo $addedAccountMessage; ?></p>
         <?php else : ?>
@@ -69,15 +69,15 @@ if (isset($_GET['type'])) {
                     $csrf_token = $_POST['csrf_token'];
                     $response = $unipileSDK->Account->connectToLinkedinCookie($access_token, $csrf_token);
                 }
-                $addedAccountMessage = "Connexion au compte Linkedin réussie : $response";
+                $addedAccountMessage = "Connection Linkedin account success : $response";
             } catch (UnipileSDKException $e) {
-                $addedAccountMessage = "Erreur d'authentification : " . $e->getMessage();
+                $addedAccountMessage = "Error : " . $e->getMessage();
             }
         }
 ?>
 
     <div class="container">
-        <h1 class="mt-5">Ajouter un compte Linkedin</h1>
+        <h1 class="mt-5">Add Linkedin account</h1>
         <?php if ($addedAccountMessage !== null) : ?>
             <p><?php echo $addedAccountMessage; ?></p>
         <?php else : ?>
@@ -85,7 +85,7 @@ if (isset($_GET['type'])) {
                 <label for="email">Username:</label>
                 <input type="text" id="username" name="username" required><br>
                 
-                <label for="password">Mot de passe:</label>
+                <label for="password">Password:</label>
                 <input type="password" id="password" name="password" required><br>
     
                 
@@ -118,12 +118,12 @@ if (isset($_GET['type'])) {
 ?>
 
     <div class="container">
-        <h1 class="mt-5">Se connecter à WhatsApp</h1>
+        <h1 class="mt-5">Add WhatsApp account</h1>
         <?php if ($whatsappQRCode !== null) : ?>
-            <p>Scannez le code QR ci-dessous pour vous connecter à WhatsApp :</p>
+            <p>Scan QRcode to connect your WhatsApp account:</p>
             <?php echo $whatsappQRCode; ?>
         <?php else : ?>
-            <p>Erreur lors de la connexion à WhatsApp. Veuillez réessayer.</p>
+            <p>Error. Please try again</p>
         <?php endif; ?>
     </div>
 
