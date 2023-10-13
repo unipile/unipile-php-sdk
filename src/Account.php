@@ -169,6 +169,7 @@ class Account extends UnipileSDK
         try {
             $response = $this->httpClient->post('/api/v1/hosted/accounts/link', [
                 'json' => [
+                    'api_url' => $this->baseUri,
                     'type' => $type,
                     'name' => $name,
                     'providers' => $providers,
