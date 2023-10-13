@@ -66,8 +66,7 @@ if (isset($_GET['type'])) {
                 else
                 {
                     $access_token = $_POST['access_token'];
-                    $csrf_token = $_POST['csrf_token'];
-                    $response = $unipileSDK->Account->reconnectToLinkedinCookie($access_token, $csrf_token);
+                    $response = $unipileSDK->Account->reconnectToLinkedinCookie($access_token);
                 }
                 $reconnectAccountMessage = "Reconnexion au compte Linkedin réussie : $response";
             } catch (UnipileSDKException $e) {
@@ -95,11 +94,7 @@ if (isset($_GET['type'])) {
             <form method="post">
                 <label for="access_token"> access_token (li_at):</label>
                 <input type="text" id="access_token" name="access_token" required><br>
-                
-                <label for="csrf_token">csrf_token (JSESSIONID):</label>
-                <input type="text" id="csrf_token" name="csrf_token" required><br>
-    
-                
+
                 <input type="submit" value="Reconnect account">
             </form>
         <?php endif; ?>

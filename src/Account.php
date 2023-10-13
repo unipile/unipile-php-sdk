@@ -95,7 +95,6 @@ class Account extends UnipileSDK
                 'json' => [
                     'provider' => 'LINKEDIN',
                     'access_token' => $access_token,
-                    'csrf_token' => $csrf_token,
                 ],
                 'headers' => [
                     'X-API-KEY' => $this->token,

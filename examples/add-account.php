@@ -66,8 +66,7 @@ if (isset($_GET['type'])) {
                 else
                 {
                     $access_token = $_POST['access_token'];
-                    $csrf_token = $_POST['csrf_token'];
-                    $response = $unipileSDK->Account->connectToLinkedinCookie($access_token, $csrf_token);
+                    $response = $unipileSDK->Account->connectToLinkedinCookie($access_token);
                 }
                 $addedAccountMessage = "Connection Linkedin account success : $response";
             } catch (UnipileSDKException $e) {
@@ -96,9 +95,6 @@ if (isset($_GET['type'])) {
                 <label for="access_token"> access_token (li_at):</label>
                 <input type="text" id="access_token" name="access_token" required><br>
                 
-                <label for="csrf_token">csrf_token (JSESSIONID):</label>
-                <input type="text" id="csrf_token" name="csrf_token" required><br>
-    
                 
                 <input type="submit" value="Ajouter le compte">
             </form>
