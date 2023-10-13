@@ -260,7 +260,7 @@ document.addEventListener("DOMContentLoaded", function () {
           }
 
           messageContainer.appendChild(messageContent);
-          chatMessages.appendChild(messageContainer);
+          chatMessages.insertBefore(messageContainer,chatMessages.firstChild);
         });
         chatMessages.setAttribute("data-chat-id", chatId);
         chatMessages.scrollTop = chatMessages.scrollHeight;
@@ -281,7 +281,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (messages.name) {
           chatName.textContent = messages.name;
         } else {
-          callAPI("getChatAttendees", { chatId: chat.id })
+          callAPI("getChatAttendees", { chatId })
             .then((attendees) => {
               chatName.textContent = attendees.items[0].name;
             })
