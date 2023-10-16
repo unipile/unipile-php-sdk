@@ -153,7 +153,7 @@ class Account extends UnipileSDK
     }
 
 
-    public function createHostedLink($expiresOn = 'PT1H', $name = '', $success_redirect_url = '', $fail_redirect_url = '', $notify_url = '', $reconnect_account = '', $providers = '*')
+    public function createHostedLink($expiresOn = 'PT1H', $name = '', $success_redirect_url = '', $failure_redirect_url = '', $notify_url = '', $reconnect_account = '', $providers = '*')
     {
         $timestamp = new \DateTime();
         $timestamp->add(new \DateInterval($expiresOn));
@@ -173,7 +173,7 @@ class Account extends UnipileSDK
                     'name' => $name,
                     'providers' => $providers,
                     'success_redirect_url' => $success_redirect_url,
-                    'fail_redirect_url' => $fail_redirect_url,
+                    'failure_redirect_url' => $failure_redirect_url,
                     'notify_url' => $notify_url,
                     'expiresOn' => $timestamp->format('Y-m-d\TH:i:s.000\Z'),
                     'reconnect_account' => $reconnect_account,
