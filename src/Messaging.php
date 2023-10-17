@@ -7,30 +7,40 @@ class Messaging extends UnipileSDK
 
     public function sendMessage($chatId, $text, $attachmentData)
     {
-        try {            
-            $response = $this->httpClient->post("/api/v1/chats/$chatId/messages", [
-                'multipart' => [
+        try {
+            $requestData = [
+                'headers' => [
+                    'X-API-KEY' => $this->token,
+                    'Accept' => 'application/json',
+                ],
+            ];
+    
+            if (empty($attachmentData)) {
+                $requestData['form_params'] = [
+                    'text' => $text,
+                ];
+            } else {
+                $requestData['multipart'] = [
                     [
-                        'name'     => 'text',
+                        'name' => 'text',
                         'contents' => $text,
                     ],
                     [
-                        'name'     => 'attachments',
+                        'name' => 'attachments',
                         'contents' => fopen($attachmentData['tmp_name'][0], 'r'),
                         'filename' => $attachmentData['name'][0],
                     ],
-                ],
-                'headers' => [
-                    'X-API-KEY' => $this->token,
-                    'Accept'    => 'application/json',
-                ],
-            ]);
-             
+                ];
+            }
+    
+            $response = $this->httpClient->post("/api/v1/chats/$chatId/messages", $requestData);
+    
             return json_decode($response->getBody(), true);
         } catch (UnipileSDKException $e) {
             throw new UnipileSDKException("Send Message in Chat Error: {$e->getMessage()}", $e->getCode(), $e);
         }
     }
+    
     
     public function getAttachments($messageId, $attachmentId)
     {
@@ -82,30 +92,6 @@ class Messaging extends UnipileSDK
             return json_decode($response->getBody(), true);
         } catch (UnipileSDKException $e) {
             throw new UnipileSDKException("List All Chats Error: {$e->getMessage()}", $e->getCode(), $e);
-        }
-    }
-
-    public function sendMessageAttendee($attendeeId, $accountId, $messageDraft)
-    {
-        try {
-            $requestData = [
-                'attendee_id' => $attendeeId,
-                'account_id' => $accountId,
-                'message_draft' => $messageDraft,
-            ];
-
-            $response = $this->httpClient->post('/api/v1/messages', [
-                'json' => $requestData,
-                'headers' => [
-                    'X-API-KEY' => $this->token,
-                ],
-            ]);
-
-            $this->handleAPIError($response);
-
-            return json_decode($response->getBody(), true);
-        } catch (UnipileSDKException $e) {
-            throw new UnipileSDKException("Send Message Error: {$e->getMessage()}", $e->getCode(), $e);
         }
     }
 
@@ -237,34 +223,6 @@ class Messaging extends UnipileSDK
             return json_decode($response->getBody(), true);
         } catch (UnipileSDKException $e) {
             throw new UnipileSDKException("Get Message Error: {$e->getMessage()}", $e->getCode(), $e);
-        }
-    }
-    public function sendMessageIM($attendeeId, $accountId, $chatId, $text, $quoteId, $attachments = [])
-    {
-        try {
-            $messageData = [
-                "attendee_id" => $attendeeId,
-                "account_id" => $accountId,
-                "message_draft" => [
-                    "chat_id" => $chatId,
-                    "text" => $text,
-                    "quote_id" => $quoteId,
-                    "attachments" => $attachments,
-                ],
-            ];
-
-            $response = $this->httpClient->post('/api/v1/messages', [
-                'json' => $messageData,
-                'headers' => [
-                    'X-API-KEY' => $this->token,
-                ],
-            ]);
-
-            $this->handleAPIError($response);
-
-            return json_decode($response->getBody(), true);
-        } catch (UnipileSDKException $e) {
-            throw new UnipileSDKException("Send IM Message Error: {$e->getMessage()}", $e->getCode(), $e);
         }
     }
 }
