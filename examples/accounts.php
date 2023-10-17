@@ -42,8 +42,8 @@ $accounts = [];
 ?>
 <div class="container">
     <h1 class="mt-5">Accounts</h1>
-    <a href="add-account.php" class="btn btn-primary mr-2">Add Account (Native Auth)</a>
-    <a href="<?=$hostedLink?>" id="hostedlink" class="btn btn-primary mr-2">Add Account (Hosted Auth)</a>
+    <a href="add-account.php" class="btn btn-primary mr-2">Add Account (Native)</a>
+    <a href="<?=$hostedLink?>" id="hostedlink" class="btn btn-primary mr-2">Add Account (Hosted)</a>
 
     <?php if (empty($accounts)) : ?>
         <p>No account</p>
@@ -66,14 +66,32 @@ $accounts = [];
                         <td><?php echo $account['name']; ?></td>
                         <td><?php echo $account['created_at']; ?></td>
                         <td><?php echo $account['id']; ?></td>
-                        <td><pre><?php echo json_encode($account['sources']); ?></pre></td>
+                        <td><pre><?php echo $account['sources'][0]['status']; ?></pre></td>
                         <td>
                             <a href="?delete=<?php echo $account['id']; ?>" class="btn btn-danger">
                                 <i class="bi bi-trash"></i> Delete
                             </a>
-                            <a href="reconnect-account.php?id=<?php echo $account['id']; ?>&type=<?php echo $account['type']; ?>" class="btn btn-primary">
-                                <i class="bi bi-trash"></i> Reconnect
+                            <?php if ($account['sources'][0]['status'] !== 'OK') : 
+                                $hostedLink =  "#";
+               
+                                    $result =  $unipileSDK->Account->createHostedLink(
+                                        'PT1H',
+                                        'My User ID',
+                                        $actual_link.'?status=success',
+                                        $actual_link.'?status=fail',
+                                        $actual_link.'/examples/callback.php',
+                                        $account['id'],
+                                        '*'                                       
+                                    );
+                                    $hostedLink = $result['url'];
+                               ?>
+                            <a href="<?php echo $hostedLink; ?>" class="btn btn-primary">
+                                <i class="bi bi-trash"></i> Reconnect (Hosted)
                             </a>
+                            <a href="reconnect-account.php?id=<?php echo $account['id']; ?>&type=<?php echo $account['type']; ?>" class="btn btn-primary">
+                                <i class="bi bi-trash"></i> Reconnect (Native)
+                            </a>
+                            <?php endif; ?>
                         </td>
                     </tr>
                 <?php endforeach; ?>
