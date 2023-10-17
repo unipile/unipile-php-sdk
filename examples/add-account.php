@@ -31,22 +31,22 @@ if (isset($_GET['type'])) {
                 <label for="email">Email:</label>
                 <input type="text" id="email" name="email" required><br>
                 
-                <label for="password">Mot de passe:</label>
+                <label for="password">Password:</label>
                 <input type="password" id="password" name="password" required><br>
                 
-                <label for="imap_host">Hôte IMAP:</label>
+                <label for="imap_host">Server IMAP:</label>
                 <input type="text" id="imap_host" name="imap_host" required><br>
                 
                 <label for="imap_port">Port IMAP:</label>
                 <input type="number" id="imap_port" name="imap_port" value="993" required><br>
                 
-                <label for="smtp_host">Hôte SMTP:</label>
+                <label for="smtp_host">Server SMTP:</label>
                 <input type="text" id="smtp_host" name="smtp_host" required><br>
                 
                 <label for="smtp_port">Port SMTP:</label>
                 <input type="number" id="smtp_port" name="smtp_port" value="587" required><br>
                 
-                <input type="submit" value="Ajouter le compte">
+                <input type="submit" value="Add account">
             </form>
         <?php endif; ?>
     </div>

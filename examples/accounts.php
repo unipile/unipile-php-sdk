@@ -88,9 +88,6 @@ $accounts = [];
                             <a href="<?php echo $hostedLink; ?>" class="btn btn-primary">
                                 <i class="bi bi-trash"></i> Reconnect (Hosted)
                             </a>
-                            <a href="reconnect-account.php?id=<?php echo $account['id']; ?>&type=<?php echo $account['type']; ?>" class="btn btn-primary">
-                                <i class="bi bi-trash"></i> Reconnect (Native)
-                            </a>
                             <?php endif; ?>
                         </td>
                     </tr>
